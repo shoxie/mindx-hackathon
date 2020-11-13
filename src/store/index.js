@@ -7,13 +7,14 @@ export default new Vuex.Store({
   state: {
     messages: "",
     userid: "",
+    users: "",
   },
   mutations: {
     SOCKET_REFRESHDATA(state, payload) {
       state.messages = payload;
     },
-    SOCKET_USERID(state, payload) {
-      state.userid = payload;
+    SOCKET_USERS(state, payload) {
+      state.users = payload;
     },
   },
   actions: {},
