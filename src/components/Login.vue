@@ -49,6 +49,19 @@
             Do over
           </button>
         </div>
+        <div class="flex flex-row gap-5 items-center w-full">
+          <h1 class="login_hide">
+            <span class="login_text text-3xl font-bold"
+              >OR you can register
+            </span>
+          </h1>
+          <button
+            @click="() => $router.push('register')"
+            class="bg-orange-300 rounded-lg flex flex-row items-center gap-2 px-5 py-2 font-bold"
+          >
+            Here
+          </button>
+        </div>
       </div>
     </div>
   </div>

@@ -43,7 +43,7 @@
 
 <script>
 import api from "../../public/js/api.js";
-// import $ from "jquery";
+import $ from "jquery";
 import { StringeeClient } from "stringee-chat-js-sdk";
 // const videoContainer = document.getElementById("videos");
 export default {
@@ -99,7 +99,7 @@ export default {
           audio: true,
           video: true,
           screen: screenSharing,
-          videoDimensions: { width: 620, height: 360 },
+          videoDimensions: { width: 640, height: 320 },
         }
       );
 
@@ -153,9 +153,7 @@ export default {
     },
     join: async function() {
       const roomToken = await api.getRoomToken(this.roomId);
-      console.clear();
 
-      console.log(roomToken);
       this.roomToken = roomToken;
 
       await this.authen();
@@ -176,12 +174,13 @@ export default {
       });
     },
     addVideo: function(video) {
+      console.log(video);
       console.log("adding video");
       video.setAttribute("controls", "true");
       video.setAttribute("playsinline", "true");
       // video.addClass("rounded-full");
       // videoContainer.appendChild(video);
-      document.getElementById("videos").appendChild(video);
+      $("#videos").append(video.clone());
     },
   },
 };
