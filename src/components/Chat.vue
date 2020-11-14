@@ -1,20 +1,41 @@
 <template>
-  <div class="min-h-full flex items-end justify-center">
-    <input
-      class="rounded-lg px-5 py-2"
-      type="text"
-      placeholder="Text to message"
-    />
-    <button
-      class="bg-orange-300 rounded-lg flex flex-row items-center gap-2 px-5 py-2"
-    >
-      Send<i class="fad fa-location-arrow"></i>
-    </button>
+  <div>
+    <div v-for="(message, index) in messages" :key="index">
+      <span>{{ message.message }}</span>
+    </div>
+    <div class="min-h-full flex items-end justify-center">
+      <div class="absolute bottom-0 flex flex=row gap-2">
+        <input
+          class="rounded-lg px-5 py-2"
+          type="text"
+          placeholder="Text to message"
+          v-model="msg"
+        />
+        <button
+          class="bg-orange-300 rounded-lg flex flex-row items-center gap-2 px-5 py-2"
+          @click="send"
+        >
+          Send<i class="fad fa-location-arrow"></i>
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "Chat",
+  data() {
+    return {
+      msg: "",
+    };
+  },
+  computed: { ...mapState(["messages"]) },
+  methods: {
+    send() {
+      this.$socket.emit("messageSent", this.msg);
+    },
+  },
 };
 </script>

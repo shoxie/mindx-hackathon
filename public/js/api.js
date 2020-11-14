@@ -22,9 +22,7 @@ class API {
       },
     };
     const response = await axios(config);
-    console.log(response);
     const room = response.data;
-    // console.log({ room });
     return room;
   }
 
@@ -34,7 +32,6 @@ class API {
     });
 
     const rooms = response.data.list;
-    console.log({ rooms });
     return rooms;
   }
 
@@ -49,7 +46,6 @@ class API {
       }
     );
 
-    console.log({ response });
 
     return response.data;
   }
@@ -96,7 +92,6 @@ class API {
     );
 
     const tokens = response.data;
-    console.log({ tokens });
     return tokens;
   }
 

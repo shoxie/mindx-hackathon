@@ -46,7 +46,7 @@ import api from "../../public/js/api.js";
 // import $ from "jquery";
 import { StringeeClient } from "stringee-chat-js-sdk";
 //remove this
-// const videoContainer = $("#videos");
+const videoContainer = document.getElementById("videos");
 export default {
   name: "Classroom",
   data() {
@@ -68,7 +68,6 @@ export default {
 
     const urlParams = new URLSearchParams(location.search);
     const roomId = urlParams.get("room");
-    console.log(urlParams);
     if (roomId) {
       this.roomId = roomId;
 
@@ -85,7 +84,7 @@ export default {
         const client = new StringeeClient();
 
         client.on("authen", function(res) {
-          console.log("on authen: ", res);
+          console.log(res);
           //   resolve(res);
         });
         this.callClient = client;
@@ -111,7 +110,6 @@ export default {
         this.roomToken
       );
       const room = roomData.room;
-      console.log({ roomData, room });
 
       if (!this.room) {
         this.room = room;
@@ -119,9 +117,8 @@ export default {
         room.on("addtrack", (e) => {
           const track = e.info.track;
 
-          console.log("addtrack", track);
+          "addtrack", track;
           if (track.serverId === localTrack.serverId) {
-            console.log("local");
             return;
           }
           this.subscribe(track);
@@ -141,23 +138,23 @@ export default {
       }
 
       await room.publish(localTrack);
-      console.log("room publish successful");
     },
     createRoom: async function() {
       const room = await api.createRoom();
       const { roomId } = room;
       const roomToken = await api.getRoomToken(roomId);
-      console.log(room);
 
       this.roomId = roomId;
       this.roomToken = roomToken;
-      console.log({ roomId, roomToken });
 
       await this.authen();
       await this.publish();
     },
     join: async function() {
       const roomToken = await api.getRoomToken(this.roomId);
+      console.clear();
+
+      console.log(roomToken);
       this.roomToken = roomToken;
 
       await this.authen();
@@ -180,8 +177,8 @@ export default {
     addVideo: function(video) {
       video.setAttribute("controls", "true");
       video.setAttribute("playsinline", "true");
-      //   videoContainer.appendChild(video);
-      document.getElementById("videos").appendChild(video);
+      videoContainer.appendChild(video);
+      // document.getElementById("videos").appendChild(video);
     },
   },
 };

@@ -36,7 +36,6 @@ const vm = new Vue({
           const client = new StringeeClient();
 
           client.on("authen", function (res) {
-            console.log("on authen: ", res);
             resolve(res);
           });
           this.callClient = client;
@@ -63,7 +62,6 @@ const vm = new Vue({
         this.roomToken
       );
       const room = roomData.room;
-      console.log({ roomData, room });
 
       if (!this.room) {
         this.room = room;
@@ -71,9 +69,7 @@ const vm = new Vue({
         room.on("addtrack", (e) => {
           const track = e.info.track;
 
-          console.log("addtrack", track);
           if (track.serverId === localTrack.serverId) {
-            console.log("local");
             return;
           }
           this.subscribe(track);
@@ -93,7 +89,6 @@ const vm = new Vue({
       }
 
       await room.publish(localTrack);
-      console.log("room publish successful");
     },
     createRoom: async function () {
       const room = await api.createRoom();
@@ -102,7 +97,6 @@ const vm = new Vue({
 
       this.roomId = roomId;
       this.roomToken = roomToken;
-      console.log({ roomId, roomToken });
 
       await this.authen();
       await this.publish();

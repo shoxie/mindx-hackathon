@@ -1,4 +1,4 @@
-# 1
+# MindX Hackathon
 
 ## Project setup
 ```
