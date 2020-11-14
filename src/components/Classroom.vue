@@ -46,7 +46,7 @@ import api from "../../public/js/api.js";
 // import $ from "jquery";
 import { StringeeClient } from "stringee-chat-js-sdk";
 //remove this
-const videoContainer = document.getElementById("videos");
+// const videoContainer = document.getElementById("videos");
 export default {
   name: "Classroom",
   data() {
@@ -177,8 +177,8 @@ export default {
     addVideo: function(video) {
       video.setAttribute("controls", "true");
       video.setAttribute("playsinline", "true");
-      videoContainer.appendChild(video);
-      // document.getElementById("videos").appendChild(video);
+      // videoContainer.appendChild(video);
+      document.getElementById("videos").appendChild(video);
     },
   },
 };

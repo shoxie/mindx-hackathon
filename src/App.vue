@@ -19,7 +19,11 @@
         data-gs-height="4"
         data-gs-no-move="yes"
       >
-        <div class="grid-stack-item-content"><Chat /></div>
+        <div class="grid-stack-item-content">
+          <transition name="fade">
+            <Login v-if="!loggedIn" @loginOff="loginOff"/> <Chat v-if="loggedIn"
+          /></transition>
+        </div>
       </div>
       <div
         class="grid-stack-item bg-white"
@@ -37,11 +41,26 @@
 
 <script>
 import Classroom from "./components/Classroom.vue";
-// import Login from "./components/Login.vue";
+import Login from "./components/Login.vue";
 import Chat from "./components/Chat.vue";
+import { mapState } from "vuex";
+
 export default {
   name: "App",
-  components: { Classroom, Chat },
+  computed: { ...mapState(["loggedIn"]) },
+  data() {
+    return {
+      register: false,
+      chat: false,
+    };
+  },
+  components: { Classroom, Login, Chat },
+  methods: {
+    loginOff() {
+      this.login = false;
+      this.chat = true;
+    },
+  },
 };
 </script>
 

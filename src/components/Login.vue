@@ -21,6 +21,7 @@
         />
         <div class="flex flex-row gap-5">
           <button
+            @click="login"
             class="px-5 py-2 rounded-lg"
             style="background-color: #9b59b6"
           >
@@ -30,37 +31,41 @@
             Do over
           </button>
         </div>
-        <div></div>
       </div>
     </div>
-    <!-- <div class="bg-purple-600 h-screen flex ">
-    <div class="bg-white mt-16  items-center rounded-3xl flex-col p-16 ml-64" >
-     
-        <form action="" method="POST" class="flex-col flex items-center h-full">
-          <h1 class="uppercase text-center font-extrabold text-3xl "> Sign in to bla bla</h1>
-          <div class="uppercase text-center font-bold mt-8 text-lg">Username</div> <br>
-          <input name="username" placeholder=" hihi " id="username" type="text" class="font-normal border-b w-5/6 h-12 hover:border-b"><br>
-          <label  class="text-lg text-center font-bold uppercase">password</label> <br>
-          <input name="password" id="password" placeholder="haha" type="text" class="font-normal focus:font-bold border-b w-5/6 h-12"><br>
-          <button class="bg-pink-500 w-64  rounded-2xl mt-8 text-lg font-semibold text-gray-600 " style="height: 50px;"> LOGIN </button>
-          <label for="" class="text-xl font-semibold">Do you have an account? </label>
-          <a href="" class=" hover:text-blue-600 text-lg">Sign Up</a>
-      </form>
-    </div>
-  </div> -->
   </div>
 </template>
 
 <script>
 import gsap from "gsap";
+import { mapState } from "vuex";
 
 export default {
   name: "Login",
+  computed: { ...mapState(["loggedIn"]) },
   data() {
     return {
       username: "",
       password: "",
     };
+  },
+  watch: {
+    loggedIn(oldVal, newVal) {
+      console.log("change");
+      if (newVal === true) this.$emit("loginOff");
+    },
+  },
+  methods: {
+    resetInput() {
+      this.username = "";
+      this.password = "";
+    },
+    login() {
+      this.$socket.emit("login", {
+        username: this.username,
+        password: this.password,
+      });
+    },
   },
   mounted() {
     gsap.to(".login_text", {

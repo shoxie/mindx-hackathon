@@ -8,6 +8,7 @@ export default new Vuex.Store({
     messages: "",
     userid: "",
     users: "",
+    loggedIn: false,
   },
   mutations: {
     SOCKET_REFRESHDATA(state, payload) {
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     },
     SOCKET_RECEIVE(state, payload) {
       state.messages = payload;
+    },
+    SOCKET_LOGIN(state, payload) {
+      state.loggedIn = payload;
     },
   },
   actions: {},
