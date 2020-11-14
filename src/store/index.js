@@ -16,6 +16,9 @@ export default new Vuex.Store({
     SOCKET_USERS(state, payload) {
       state.users = payload;
     },
+    SOCKET_RECEIVE(state, payload) {
+      state.messages = payload;
+    },
   },
   actions: {},
   modules: {},
