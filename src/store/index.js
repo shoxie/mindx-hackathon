@@ -10,6 +10,7 @@ export default new Vuex.Store({
     users: "",
     courses: "",
     loggedIn: false,
+    chatMember: "",
   },
   mutations: {
     SOCKET_REFRESHDATA(state, payload) {
@@ -26,6 +27,9 @@ export default new Vuex.Store({
     },
     SOCKET_COURSES(state, payload) {
       state.coruses = payload;
+    },
+    SOCKET_PARTICIPANTS(state, payload) {
+      state.chatMember = payload;
     },
   },
   actions: {},

@@ -4,7 +4,25 @@
       class="flex flex-col items-center justify-center bg-white p-10 rounded-lg"
     >
       <h1 class="login_hide">
-        <span class="login_text text-3xl font-bold">Sign in to continue</span>
+        <span class="login_text text-3xl font-bold"
+          >Enter your name to start chatting</span
+        >
+      </h1>
+      <div class="flex flex-row gap-5 pt-10">
+        <input
+          class="rounded-lg border-b-2 px-5 py-2"
+          placeholder="Enter your name"
+          v-model="username"
+        />
+        <button
+          @click="setName"
+          class="bg-orange-300 rounded-lg flex flex-row items-center gap-2 px-5 py-2"
+        >
+          Send<i class="fad fa-location-arrow"></i>
+        </button>
+      </div>
+      <h1 class="login_hide pt-10">
+        <span class="login_text text-3xl font-bold">OR you can sign in</span>
       </h1>
       <div class="flex flex-col items-center gap-10 pt-4">
         <input
@@ -15,7 +33,7 @@
         />
         <input
           class="border-b-2"
-          type="text"
+          type="password"
           placeholder="Password"
           v-model="password"
         />
@@ -56,6 +74,9 @@ export default {
     },
   },
   methods: {
+    setName() {
+      this.$socket.emit("setName", this.username);
+    },
     resetInput() {
       this.username = "";
       this.password = "";

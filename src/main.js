@@ -4,10 +4,14 @@ import store from "./store";
 import VueSocketIO from "vue-socket.io";
 import axios from "axios";
 import VueAxios from "vue-axios";
+import Vuetify from "vuetify";
 
 Vue.config.productionTip = false;
+Vue.use(Vuetify);
 Vue.use(VueAxios, axios);
-
+import Chat from "vue-beautiful-chat";
+import router from "./router";
+Vue.use(Chat);
 Vue.use(
   new VueSocketIO({
     debug: true,
@@ -21,5 +25,6 @@ Vue.use(
 );
 new Vue({
   store,
+  router,
   render: (h) => h(App),
 }).$mount("#app");

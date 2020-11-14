@@ -20,23 +20,24 @@
         data-gs-height="4"
         data-gs-no-move="yes"
       >
-        <div class="grid-stack-item-content">
-          <transition name="fade">
-            <Login v-if="!loggedIn" @loginOff="loginOff"/> <Chat v-if="loggedIn"
-          /></transition>
-        </div>
+        <transition name="fade">
+          <div class="grid-stack-item-content">
+            <CourseSelector v-if="loggedIn" />
+            <Login v-if="!loggedIn" @loginOff="loginOff" />
+          </div>
+        </transition>
       </div>
       <div
-        class="grid-stack-item"
+        class="grid-stack-item z-0"
         data-gs-x="0"
         data-gs-y="10"
         data-gs-width="12"
         data-gs-height="2"
         data-gs-no-move="yes"
       >
-        <div class="grid-stack-item-content" id="testid">
-
-          <CourseSelector v-if="register" />
+        <div class="grid-stack-item-content">
+          <!-- <Chat v-if="loggedIn" /> -->
+          <Chat />
         </div>
       </div>
     </div>
@@ -59,7 +60,7 @@ export default {
       chat: false,
     };
   },
-  components: { Classroom, Login, Chat, CourseSelector },
+  components: { Classroom, Chat, CourseSelector, Login },
   methods: {
     loginOff() {
       this.login = false;

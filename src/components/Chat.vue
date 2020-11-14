@@ -1,12 +1,23 @@
 <template>
   <div>
     <div v-for="(message, index) in messages" :key="index">
-      <span>{{ message.message }}</span>
+      <span class="w-full">{{ message.message }}</span>
     </div>
+    <v-list>
+      <v-list-tile v-for="(message, index) in messages" :key="index">
+        <v-list-tile-content>
+          <v-list-tile-title v-text="message.message"></v-list-tile-title>
+        </v-list-tile-content>
+
+        <v-btn icon>
+          <v-icon>edit</v-icon>
+        </v-btn>
+      </v-list-tile>
+    </v-list>
     <div class="min-h-full flex items-end justify-center">
-      <div class="absolute bottom-0 flex flex=row gap-2">
+      <div class="absolute bottom-0 flex flex=row gap-2 w-full">
         <input
-          class="rounded-lg px-5 py-2"
+          class="rounded-lg px-5 py-2 w-full"
           type="text"
           placeholder="Text to message"
           v-model="msg"
