@@ -8,6 +8,7 @@ export default new Vuex.Store({
     messages: "",
     userid: "",
     users: "",
+    courses: "",
     loggedIn: false,
   },
   mutations: {
@@ -22,6 +23,9 @@ export default new Vuex.Store({
     },
     SOCKET_LOGIN(state, payload) {
       state.loggedIn = payload;
+    },
+    SOCKET_COURSES(state, payload) {
+      state.coruses = payload;
     },
   },
   actions: {},

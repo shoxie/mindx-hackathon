@@ -45,7 +45,6 @@
 import api from "../../public/js/api.js";
 // import $ from "jquery";
 import { StringeeClient } from "stringee-chat-js-sdk";
-//remove this
 // const videoContainer = document.getElementById("videos");
 export default {
   name: "Classroom",
@@ -76,20 +75,22 @@ export default {
   },
   methods: {
     authen: async function() {
-      const userId = `${(Math.random() * 100000).toFixed(6)}`;
-      const userToken = await api.getUserToken(userId);
-      this.userToken = userToken;
+      return new Promise(async (resolve) => {
+        const userId = `${(Math.random() * 100000).toFixed(6)}`;
+        const userToken = await api.getUserToken(userId);
+        this.userToken = userToken;
 
-      if (!this.callClient) {
-        const client = new StringeeClient();
+        if (!this.callClient) {
+          const client = new StringeeClient();
 
-        client.on("authen", function(res) {
-          console.log(res);
-          //   resolve(res);
-        });
-        this.callClient = client;
-      }
-      this.callClient.connect(userToken);
+          client.on("authen", function(res) {
+            console.log(res);
+            resolve(res);
+          });
+          this.callClient = client;
+        }
+        this.callClient.connect(userToken);
+      });
     },
     publish: async function(screenSharing = false) {
       const localTrack = await window.StringeeVideo.createLocalVideoTrack(
@@ -98,7 +99,7 @@ export default {
           audio: true,
           video: true,
           screen: screenSharing,
-          videoDimensions: { width: 720, height: 420 },
+          videoDimensions: { width: 620, height: 360 },
         }
       );
 
@@ -117,7 +118,7 @@ export default {
         room.on("addtrack", (e) => {
           const track = e.info.track;
 
-          "addtrack", track;
+          console.log("addtrack", track);
           if (track.serverId === localTrack.serverId) {
             return;
           }
@@ -175,8 +176,10 @@ export default {
       });
     },
     addVideo: function(video) {
+      console.log("adding video");
       video.setAttribute("controls", "true");
       video.setAttribute("playsinline", "true");
+      // video.addClass("rounded-full");
       // videoContainer.appendChild(video);
       document.getElementById("videos").appendChild(video);
     },

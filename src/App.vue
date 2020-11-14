@@ -1,3 +1,4 @@
+/* eslint-disable */
 <template>
   <div class="bg-green-600 min-h-screen">
     <div class="grid-stack">
@@ -26,14 +27,17 @@
         </div>
       </div>
       <div
-        class="grid-stack-item bg-white"
+        class="grid-stack-item"
         data-gs-x="0"
         data-gs-y="10"
         data-gs-width="12"
         data-gs-height="2"
         data-gs-no-move="yes"
       >
-        <div class="grid-stack-item-content">my 3rd widget</div>
+        <div class="grid-stack-item-content" id="testid">
+
+          <CourseSelector v-if="register" />
+        </div>
       </div>
     </div>
   </div>
@@ -43,6 +47,7 @@
 import Classroom from "./components/Classroom.vue";
 import Login from "./components/Login.vue";
 import Chat from "./components/Chat.vue";
+import CourseSelector from "./components/CourseSelector.vue";
 import { mapState } from "vuex";
 
 export default {
@@ -54,7 +59,7 @@ export default {
       chat: false,
     };
   },
-  components: { Classroom, Login, Chat },
+  components: { Classroom, Login, Chat, CourseSelector },
   methods: {
     loginOff() {
       this.login = false;
@@ -74,3 +79,4 @@ export default {
   margin-top: 60px;
 }
 </style>
+/* eslint-disable */
