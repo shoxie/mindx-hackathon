@@ -23,7 +23,7 @@
         <transition name="fade">
           <div class="grid-stack-item-content">
             <CourseSelector v-if="loggedIn" />
-            <Login v-if="!loggedIn" @loginOff="loginOff" />
+            <Login v-if="!loggedIn" @loginpff="loginoff" />
           </div>
         </transition>
       </div>
@@ -36,8 +36,8 @@
         data-gs-no-move="yes"
       >
         <div class="grid-stack-item-content">
-          <!-- <Chat v-if="loggedIn" /> -->
-          <Chat />
+          <!-- <Chat v-if="loggedIn" />  -->
+          <NewChat />
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@
 <script>
 import Classroom from "./components/Classroom.vue";
 import Login from "./components/Login.vue";
-import Chat from "./components/Chat.vue";
+import NewChat from "./components/NewChat.vue";
 import CourseSelector from "./components/CourseSelector.vue";
 import { mapState } from "vuex";
 
@@ -60,9 +60,9 @@ export default {
       chat: false,
     };
   },
-  components: { Classroom, Chat, CourseSelector, Login },
+  components: { Classroom, NewChat, CourseSelector, Login },
   methods: {
-    loginOff() {
+    loginoff() {
       this.login = false;
       this.chat = true;
     },

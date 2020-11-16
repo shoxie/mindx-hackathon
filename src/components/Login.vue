@@ -83,7 +83,7 @@ export default {
   watch: {
     loggedIn(oldVal, newVal) {
       console.log("change");
-      if (newVal === true) this.$emit("loginOff");
+      if (newVal === true) this.$emit("loginoff");
     },
   },
   methods: {

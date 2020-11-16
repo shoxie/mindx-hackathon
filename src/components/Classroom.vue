@@ -180,7 +180,7 @@ export default {
       video.setAttribute("playsinline", "true");
       // video.addClass("rounded-full");
       // videoContainer.appendChild(video);
-      $("#videos").append(video.clone());
+      $("#videos").append(video);
     },
   },
 };
